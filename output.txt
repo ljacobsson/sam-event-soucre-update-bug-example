@@ -1,0 +1,152 @@
+*** running sam deploy without BisectBatchOnFunctionError flag set
+
+	Deploying with following values
+	===============================
+	Stack name                 : sam-test
+	Region                     : eu-west-1
+	Confirm changeset          : False
+	Deployment s3 bucket       : aws-sam-cli-managed-default-samclisourcebucket-abcdef123456
+	Capabilities               : ["CAPABILITY_IAM"]
+	Parameter overrides        : {}
+
+Initiating deployment
+=====================
+
+Waiting for changeset to be created..
+
+CloudFormation stack changeset
+------------------------------------------------------------------------------------------------
+Operation                        LogicalResourceId                ResourceType                   
+------------------------------------------------------------------------------------------------
++ Add                            KinesisStreamConsumerRole        AWS::IAM::Role                 
++ Add                            KinesisStreamConsumerStreams     AWS::Lambda::EventSourceMappin 
+                                                                  g                              
++ Add                            KinesisStreamConsumer            AWS::Lambda::Function          
++ Add                            KinesisStream                    AWS::Kinesis::Stream           
+------------------------------------------------------------------------------------------------
+
+Changeset created successfully. arn:aws:cloudformation:eu-west-1:123456789012:changeSet/samcli-deploy1582966443/403179aa-42a3-4919-9bea-2b1691068ecb
+
+
+2020-02-29 09:54:09 - Waiting for stack create/update to complete
+
+CloudFormation events from changeset
+-------------------------------------------------------------------------------------------------
+ResourceStatus           ResourceType             LogicalResourceId        ResourceStatusReason   
+-------------------------------------------------------------------------------------------------
+CREATE_IN_PROGRESS       AWS::Kinesis::Stream     KinesisStream            Resource creation      
+                                                                           Initiated              
+CREATE_IN_PROGRESS       AWS::IAM::Role           KinesisStreamConsumerR   -                      
+                                                  ole                                             
+CREATE_IN_PROGRESS       AWS::Kinesis::Stream     KinesisStream            -                      
+CREATE_IN_PROGRESS       AWS::IAM::Role           KinesisStreamConsumerR   Resource creation      
+                                                  ole                      Initiated              
+CREATE_COMPLETE          AWS::IAM::Role           KinesisStreamConsumerR   -                      
+                                                  ole                                             
+CREATE_IN_PROGRESS       AWS::Lambda::Function    KinesisStreamConsumer    -                      
+CREATE_IN_PROGRESS       AWS::Lambda::Function    KinesisStreamConsumer    Resource creation      
+                                                                           Initiated              
+CREATE_COMPLETE          AWS::Lambda::Function    KinesisStreamConsumer    -                      
+CREATE_COMPLETE          AWS::Kinesis::Stream     KinesisStream            -                      
+CREATE_IN_PROGRESS       AWS::Lambda::EventSour   KinesisStreamConsumerS   Resource creation      
+                         ceMapping                treams                   Initiated              
+CREATE_IN_PROGRESS       AWS::Lambda::EventSour   KinesisStreamConsumerS   -                      
+                         ceMapping                treams                                          
+CREATE_COMPLETE          AWS::Lambda::EventSour   KinesisStreamConsumerS   -                      
+                         ceMapping                treams                                          
+CREATE_COMPLETE          AWS::CloudFormation::S   sam-test                 -                      
+                         tack                                                                     
+-------------------------------------------------------------------------------------------------
+
+Successfully created/updated stack - sam-test in eu-west-1
+
+*** checking list-event-source-mappings
+{
+    "EventSourceMappings": [
+        {
+            "UUID": "71266cba-aee3-4de0-8a91-9e9ff5fc364b",
+            "BatchSize": 10,
+            "MaximumBatchingWindowInSeconds": 0,
+            "ParallelizationFactor": 1,
+            "EventSourceArn": "arn:aws:kinesis:eu-west-1:123456789012:stream/sam-test-KinesisStream-132ZAMB8GVVRR",
+            "FunctionArn": "arn:aws:lambda:eu-west-1:123456789012:function:sam-test-function",
+            "LastModified": "2020-02-29T09:54:00+01:00",
+            "LastProcessingResult": "No records processed",
+            "State": "Enabled",
+            "StateTransitionReason": "User action",
+            "DestinationConfig": {
+                "OnFailure": {}
+            },
+            "MaximumRecordAgeInSeconds": 604800,
+            "BisectBatchOnFunctionError": false,
+            "MaximumRetryAttempts": 10000
+        }
+    ]
+}
+*** running sam deploy with BisectBatchOnFunctionError flag set
+
+	Deploying with following values
+	===============================
+	Stack name                 : sam-test
+	Region                     : eu-west-1
+	Confirm changeset          : False
+	Deployment s3 bucket       : aws-sam-cli-managed-default-samclisourcebucket-abcdef123456
+	Capabilities               : ["CAPABILITY_IAM"]
+	Parameter overrides        : {}
+
+Initiating deployment
+=====================
+
+Waiting for changeset to be created..
+
+CloudFormation stack changeset
+------------------------------------------------------------------------------------------------
+Operation                        LogicalResourceId                ResourceType                   
+------------------------------------------------------------------------------------------------
+* Modify                         KinesisStreamConsumerStreams     AWS::Lambda::EventSourceMappin 
+                                                                  g                              
+* Modify                         KinesisStreamConsumer            AWS::Lambda::Function          
+------------------------------------------------------------------------------------------------
+
+Changeset created successfully. arn:aws:cloudformation:eu-west-1:123456789012:changeSet/samcli-deploy1582966499/9ec2aec8-3f99-433e-a3e0-42686c41116d
+
+
+2020-02-29 09:55:05 - Waiting for stack create/update to complete
+
+CloudFormation events from changeset
+-------------------------------------------------------------------------------------------------
+ResourceStatus           ResourceType             LogicalResourceId        ResourceStatusReason   
+-------------------------------------------------------------------------------------------------
+UPDATE_IN_PROGRESS       AWS::Lambda::Function    KinesisStreamConsumer    -                      
+UPDATE_COMPLETE          AWS::Lambda::Function    KinesisStreamConsumer    -                      
+UPDATE_COMPLETE_CLEANU   AWS::CloudFormation::S   sam-test                 -                      
+P_IN_PROGRESS            tack                                                                     
+UPDATE_COMPLETE          AWS::CloudFormation::S   sam-test                 -                      
+                         tack                                                                     
+-------------------------------------------------------------------------------------------------
+
+Successfully created/updated stack - sam-test in eu-west-1
+
+*** checking list-event-source-mappings again
+{
+    "EventSourceMappings": [
+        {
+            "UUID": "71266cba-aee3-4de0-8a91-9e9ff5fc364b",
+            "BatchSize": 10,
+            "MaximumBatchingWindowInSeconds": 0,
+            "ParallelizationFactor": 1,
+            "EventSourceArn": "arn:aws:kinesis:eu-west-1:123456789012:stream/sam-test-KinesisStream-132ZAMB8GVVRR",
+            "FunctionArn": "arn:aws:lambda:eu-west-1:123456789012:function:sam-test-function",
+            "LastModified": "2020-02-29T09:54:00+01:00",
+            "LastProcessingResult": "No records processed",
+            "State": "Enabled",
+            "StateTransitionReason": "User action",
+            "DestinationConfig": {
+                "OnFailure": {}
+            },
+            "MaximumRecordAgeInSeconds": 604800,
+            "BisectBatchOnFunctionError": false,    <---- Expecting this to be true
+            "MaximumRetryAttempts": 10000           <---- Expecting this to be 10
+        }
+    ]
+}
